@@ -17,8 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.atanu.spring.payment.service.CardEntity;
-
 import lombok.Getter;
 import lombok.Setter;
 

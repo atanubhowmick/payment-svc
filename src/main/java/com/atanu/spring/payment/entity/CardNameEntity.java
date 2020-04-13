@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.atanu.spring.payment.service;
+package com.atanu.spring.payment.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
