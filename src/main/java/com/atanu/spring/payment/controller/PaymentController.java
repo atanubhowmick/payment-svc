@@ -8,12 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.atanu.spring.payment.dto.CartDetails;
+import com.atanu.spring.payment.annotation.LogMethodCall;
 import com.atanu.spring.payment.dto.GenericResponse;
+import com.atanu.spring.payment.dto.PaymentRequest;
+import com.atanu.spring.payment.dto.PaymentResponse;
 import com.atanu.spring.payment.service.BaseService;
 
 import io.swagger.annotations.ApiOperation;
@@ -24,25 +26,19 @@ import io.swagger.annotations.ApiParam;
  *
  */
 @RestController
-@RequestMapping("/api/cart")
+@RequestMapping("/api/payment")
+@LogMethodCall
 public class PaymentController {
 	
 	@Autowired
-	private BaseService<CartDetails, Long> cartService;
+	private BaseService<PaymentRequest, PaymentResponse> paymentService;
 	
-	@ApiOperation(value = "Get Cart by Id", response = GenericResponse.class)
-	@GetMapping(value = "/get-by-id/{cart-id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<GenericResponse<CartDetails>> getCartDetailsById(
-			@ApiParam(value = "Provide Cart Id to get Cart Details", required = true) @PathVariable("cart-id") Long cartId) {
-		GenericResponse<CartDetails> response = new GenericResponse<>(cartService.get(cartId));
+	@ApiOperation(value = "Make Payment", response = GenericResponse.class)
+	@GetMapping(value = "/make-payment", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<GenericResponse<PaymentResponse>> getCartDetailsById(
+			@ApiParam(value = "Make Payment to pruchase products", required = true) @RequestBody PaymentRequest request) {
+		GenericResponse<PaymentResponse> response = new GenericResponse<>(paymentService.create(request));
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-	
-	@ApiOperation(value = "Get Cart by User Id", response = GenericResponse.class)
-	@GetMapping(value = "/get-by-user-id/{user-id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<GenericResponse<CartDetails>> getCartDetailsByUserId(
-			@ApiParam(value = "Provide User Id to get Cart Details", required = true) @PathVariable("user-id") Long userId) {
-		GenericResponse<CartDetails> response = new GenericResponse<>(cartService.getByUserId(userId));
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
+
 }

@@ -9,22 +9,20 @@ package com.atanu.spring.payment.service;
  * @author Atanu Bhowmick
  *
  */
-public interface BaseService<T, K> {
+public interface BaseService<R, T> {
 
-	/**
-	 * Find by Id
-	 * 
-	 * @param id
-	 * @return T
-	 */
-	T get(K id);
-	
 	/**
 	 * Find by User Id
 	 * 
 	 * @param userId
 	 * @return T
 	 */
-	T getByUserId(Long userId);
+	T getByRequestId(Long requestId);
 
+	/**
+	 * 
+	 * @param r
+	 * @return T
+	 */
+	T create(R r);
 }

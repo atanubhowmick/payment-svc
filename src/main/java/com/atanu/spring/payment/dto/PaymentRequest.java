@@ -18,7 +18,7 @@ public class PaymentRequest extends AbstractBaseDTO {
 
 	private static final long serialVersionUID = 2070422380769978386L;
 
-	private UserDetails userDetails;
+	private Long userId;
 	private CardDetails cardDetails;
-	private Double totalAmount;
+	private Double paymentAmount;
 }

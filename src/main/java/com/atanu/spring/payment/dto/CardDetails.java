@@ -25,13 +25,12 @@ public class CardDetails extends AbstractBaseDTO {
 
 	private static final long serialVersionUID = 5013832371370368907L;
 
+	private Long cardId;
 	private String payeeName;
 	private Long cardNumber;
 	private CardTypeEnum cardType;
 	private CardNameEnum cardName;
-	
 	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy", timezone = "IST")
 	private Date validityDate;
-	
 	private Integer cvvNumber;
 }
